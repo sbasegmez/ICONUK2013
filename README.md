@@ -1,3 +1,3 @@
 Demos
 =====
-This repository contains my demo applications from my blog or sessions in several conferences...
+This repository contains my demo application from ICONUK 2013 and also for NotesIn9 session about Asynchronous Processing
