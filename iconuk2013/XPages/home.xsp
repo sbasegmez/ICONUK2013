@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core" xmlns:xe="http://www.ibm.com/xsp/coreex"
+	xmlns:xc="http://www.ibm.com/xsp/custom" style="margin:30px;">
+
+	<xp:this.resources>
+		<xp:dojoModule name="dijit.ProgressBar"></xp:dojoModule>
+	</xp:this.resources>
+
+	<xp:this.beforePageLoad><![CDATA[#{javascript:if(null==sessionScope.disableAutoPoll) {
+	sessionScope.disableAutoPoll=true;
+}}]]></xp:this.beforePageLoad>
+	<xc:ccStandBy></xc:ccStandBy>
+	<xp:table>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="From:" id="label1"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="from" value="#{viewScope.fromDate}">
+					<xp:dateTimeHelper id="dateTimeHelper1"></xp:dateTimeHelper>
+					<xp:this.converter>
+						<xp:convertDateTime type="date" locale="en"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:inputText>
+			</xp:td>
+			<xp:td>**** Must be bigger!!!</xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td>
+				<xp:label value="Until:" id="label2"></xp:label>
+			</xp:td>
+			<xp:td>
+				<xp:inputText id="until" value="#{viewScope.untilDate}"
+					defaultValue="#{javascript:@Adjust(@Today(), 0, -3, 0, 0, 0, 0)}">
+					<xp:dateTimeHelper id="dateTimeHelper2"></xp:dateTimeHelper>
+					<xp:this.converter>
+						<xp:convertDateTime type="date" locale="en"></xp:convertDateTime>
+					</xp:this.converter>
+				</xp:inputText>
+			</xp:td>
+			<xp:td></xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+			<xp:td></xp:td>
+		</xp:tr>
+		<xp:tr>
+			<xp:td></xp:td>
+			<xp:td>
+				<xp:button value="Sync Run" id="button1">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" id="eventHandler1" refreshId="results">
+						<xp:this.action><![CDATA[#{javascript:
+var analyzer=new com.developi.iconuk13.helper.Analyzer();
+
+if(viewScope.fromDate!=null) analyzer.setDateFrom(viewScope.fromDate);
+if(viewScope.untilDate!=null) analyzer.setDateUntil(viewScope.untilDate);
+
+queue.addAndRunAnalyzer(analyzer);
+}]]></xp:this.action>
+					</xp:eventHandler>
+				</xp:button>
+				<xp:button value="Async Run" id="button2">
+					<xp:eventHandler event="onclick" submit="true"
+						refreshMode="partial" id="eventHandler3" refreshId="results">
+						<xp:this.action><![CDATA[#{javascript:
+var analyzer=new com.developi.iconuk13.helper.Analyzer();
+
+if(viewScope.fromDate!=null) analyzer.setDateFrom(viewScope.fromDate);
+if(viewScope.untilDate!=null) analyzer.setDateUntil(viewScope.untilDate);
+
+queue.addAndForgetAnalyzer(analyzer);
+
+sessionScope.disableAutoPoll=false;
+}]]></xp:this.action>
+						<xp:this.onComplete><![CDATA[XSP.partialRefreshGet("#{id:autoPollCC}", {})]]></xp:this.onComplete>
+					</xp:eventHandler>
+				</xp:button>
+			</xp:td>
+			<xp:td style="text-align:right">
+			<xp:button value="Have some fun?" id="button3"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+	<xp:this.action>
+		<xp:openPage name="/someOtherPage.xsp"></xp:openPage>
+	</xp:this.action></xp:eventHandler></xp:button></xp:td>
+		</xp:tr>
+	</xp:table>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+	<xp:panel id="results">
+		<xp:table>
+			<xp:tr>
+				<xp:td valign="top" style="width:500px" align="center">
+					<xp:text escape="true" id="computedField7" value="Analyzer Queue"
+						style="font-weight:bold;font-size:11pt">
+					</xp:text>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+					<xp:dataTable id="dataTable2" rows="50" var="item"
+						value="#{javascript:fromJson(queue.getQueueJSON())}" style="margin:5px 10px;">
+						<xp:column id="column6">
+							<xp:link escape="true" text="#{item.detail}" id="link1">
+								<xp:eventHandler event="onclick" submit="true"
+									refreshMode="partial" refreshId="results" id="eventHandler2">
+									<xp:this.action><![CDATA[#{javascript:viewScope.viewAnalyzer=item.name;viewScope.viewAnalyzerDetail=item.detail;}]]></xp:this.action>
+								</xp:eventHandler>
+							</xp:link>
+							<xp:this.facets>
+								<xp:label value="Detail" id="label7" style="font-weight:bold"
+									xp:key="header">
+								</xp:label>
+							</xp:this.facets>
+						</xp:column>
+						<xp:column id="column4">
+							<xp:div dojoType="dijit.ProgressBar"
+								style="width:200px" id="progress1" rendered="#{!item.completed}">
+							<xp:this.dojoAttributes>
+								<xp:dojoAttribute name="progress"
+									value="#{javascript:item.progress*100}">
+								</xp:dojoAttribute>
+							</xp:this.dojoAttributes></xp:div>
+							<xp:span rendered="#{item.completed}">
+							<xp:text escape="true" id="computedField4" value="#{item.status} (#{item.elapsedTime})">
+							</xp:text>
+							</xp:span>
+							<xp:this.facets>
+								<xp:span xp:key="header">
+									<xp:label value="Status" id="label6" style="font-weight:bold">
+									</xp:label>
+								</xp:span>
+							</xp:this.facets>
+						</xp:column>
+					</xp:dataTable>
+				</xp:td>
+				<xp:td style="width:30px">
+					<xp:br></xp:br>
+				</xp:td>
+				<xp:td valign="top" align="center">
+					<xp:text escape="true" id="computedField6" style="font-size:12pt;font-weight:bold">
+						<xp:this.value><![CDATA[#{javascript:viewScope.viewAnalyzerDetail || "Select an item to view results"}]]></xp:this.value>
+					</xp:text>
+					<xp:br></xp:br>
+					<xp:br></xp:br>
+
+					<xp:dataTable id="dataTable1" rows="300" var="myData"
+						style="margin:5px 10px; width:300px">
+						<xp:this.value><![CDATA[#{javascript:jsonString=queue.getResultJSONByName(viewScope.viewAnalyzer);
+
+fromJson(jsonString)}]]></xp:this.value>
+						<xp:column id="column1">
+							<xp:this.facets>
+								<xp:label value="Browser" id="label3" xp:key="header"
+									style="font-weight:bold">
+								</xp:label>
+							</xp:this.facets>
+							<xp:text escape="true" id="computedField1" value="#{myData.browser}">
+							</xp:text>
+						</xp:column>
+						<xp:column id="column2" style="width:30px;">
+							<xp:this.facets>
+								<xp:label value="Count" id="label4" xp:key="header"
+									style="font-weight:bold">
+								</xp:label>
+							</xp:this.facets>
+							<xp:text escape="true" id="computedField2" value="#{myData.count}">
+								<xp:this.converter>
+									<xp:convertNumber type="number" integerOnly="true">
+									</xp:convertNumber>
+								</xp:this.converter>
+							</xp:text>
+						</xp:column>
+					</xp:dataTable>
+				</xp:td>
+			</xp:tr>
+		</xp:table>
+	</xp:panel>
+	<xp:br></xp:br>
+	<xc:ccAutoPoll id="autoPollCC" seconds="1"
+		apStyle="position:absolute; top:10px; right:10px">
+		<xc:this.refreshId><![CDATA[#{javascript:var resultsPanel:com.ibm.xsp.component.UIPanelEx = getComponent("results");
+
+resultsPanel.getClientId(facesContext);}]]></xc:this.refreshId>
+	</xc:ccAutoPoll>
+	<xp:br></xp:br>
+	<xp:br></xp:br>
+</xp:view>

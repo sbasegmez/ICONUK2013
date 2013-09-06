@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config>
+  <faces-config-extension>
+    <namespace-uri>http://www.ibm.com/xsp/custom</namespace-uri>
+    <default-prefix>xc</default-prefix>
+  </faces-config-extension>
+  <composite-component>
+    <component-type>ccAutoPoll</component-type>
+    <composite-name>ccAutoPoll</composite-name>
+    <composite-file>/ccAutoPoll.xsp</composite-file>
+    <composite-extension>
+      <designer-extension>
+        <in-palette>true</in-palette>
+      </designer-extension>
+    </composite-extension>
+    <property>
+      <property-name>refreshId</property-name>
+      <property-class>string</property-class>
+      <display-name>ClientId of container to be refreshed.</display-name>
+      <property-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>seconds</property-name>
+      <property-class>int</property-class>
+      <display-name>How many seconds we will refresh?</display-name>
+      <property-extension>
+        <designer-extension>
+          <default-value>5</default-value>
+        </designer-extension>
+        <required>true</required>
+      </property-extension>
+    </property>
+    <property>
+      <property-name>apStyle</property-name>
+      <property-class>string</property-class>
+    </property>
+  </composite-component>
+</faces-config>

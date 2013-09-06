@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+
+	<xp:button value="Back to Home" id="button1"><xp:eventHandler event="onclick" submit="true" refreshMode="complete">
+	<xp:this.action>
+		<xp:openPage name="/home.xsp"></xp:openPage>
+	</xp:this.action></xp:eventHandler></xp:button>
+
+	<iframe src="tictactoe.html" width="100%" height="500px" style="border:0px;"/>
+</xp:view>

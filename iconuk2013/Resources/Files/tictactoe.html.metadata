@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C2257BD00064BB16" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ee" sequence="5" unid="DCB2CB5363241168C2257BD30059A801">
+<created><datetime dst="true">20130826T191917,13+03</datetime></created>
+<modified><datetime dst="true">20130907T001126,78+03</datetime></modified>
+<revised><datetime dst="true">20130907T001126,77+03</datetime></revised>
+<lastaccessed><datetime dst="true">20130907T001126,78+03</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130826T191917,14+03</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Serdar Basegmez/O=developi</name></updatedby>
+<wassignedby><name>CN=Serdar Basegmez/O=developi</name></wassignedby>
+<item name="$TITLE"><text>tictactoe.html</text></item>
+<item name="$MimeType"><text>text/html</text></item>
+<item name="$Flags"><text>345Cg&gt;Q</text></item>
+<item name="$MimeCharSet"><text>UTF-8</text></item>
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>tictactoe.html</text></item></note>

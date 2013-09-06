@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xp:view xmlns:xp="http://www.ibm.com/xsp/core">
+	<xp:div id="autoPollContainer" style="#{compositeData.apStyle}">
+	<xp:label value="AutoPolling: " id="label1"></xp:label>
+	<xp:link escape="true" id="link1" text="ON" style="color:rgb(0,128,128);font-weight:bold" rendered="#{javascript:!sessionScope.disableAutoPoll}">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="partial" refreshId="autoPollContainer">
+			<xp:this.action><![CDATA[#{javascript:sessionScope.disableAutoPoll=!sessionScope.disableAutoPoll;}]]></xp:this.action>
+		</xp:eventHandler></xp:link>
+	<xp:link escape="true" text="OFF" id="link2" style="color:rgb(128,64,64);font-weight:bold" rendered="#{javascript:sessionScope.disableAutoPoll}">
+		<xp:eventHandler event="onclick" submit="true"
+			refreshMode="partial" refreshId="autoPollContainer">
+			<xp:this.action><![CDATA[#{javascript:sessionScope.disableAutoPoll=!sessionScope.disableAutoPoll}]]></xp:this.action>
+		</xp:eventHandler></xp:link>
+
+	<xp:scriptBlock id="scriptBlock1">
+		<xp:this.value><![CDATA[
+var autoPollEnabled=#{javascript:!sessionScope.disableAutoPoll};
+var autoPollFreq=#{compositeData.seconds} * 1000;
+function autoPoll() { 
+	id="#{compositeData.refreshId}";
+	XSP.partialRefreshGet(id, {});
+	
+	if(autoPollEnabled) setTimeout(autoPoll, autoPollFreq);
+}
+
+if(autoPollEnabled) setTimeout(autoPoll, autoPollFreq);]]></xp:this.value>
+	</xp:scriptBlock>
+	</xp:div>
+</xp:view>

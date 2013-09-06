@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C2257BD00064BB16" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1ca" sequence="9" unid="175B676FB8BFA68DC2257BD2007E84F9">
+<created><datetime dst="true">20130826T020155,77+03</datetime></created>
+<modified><datetime dst="true">20130826T020207,03+03</datetime></modified>
+<revised><datetime dst="true">20130826T020207,02+03</datetime></revised>
+<lastaccessed><datetime dst="true">20130826T020207,03+03</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130826T020155,76+03</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Serdar Basegmez/O=developi</name></updatedby>
+<wassignedby><name>CN=Serdar Basegmez/O=developi</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>com/google/code/useragent/UserAgentParseException.java</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/google/code/useragent/UserAgentParseException.java</text></item>
+
+</note>

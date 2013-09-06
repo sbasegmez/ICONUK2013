@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?><note class="form" replicaid="C2257BD00064BB16" version="9.0" xmlns="http://www.lotus.com/dxl">
+<noteinfo noteid="1aa" sequence="21" unid="B4B575B4CBBB389AC2257BD2006146FA">
+<created><datetime dst="true">20130825T204231,62+03</datetime></created>
+<modified><datetime dst="true">20130907T001521,19+03</datetime></modified>
+<revised><datetime dst="true">20130907T001521,18+03</datetime></revised>
+<lastaccessed><datetime dst="true">20130907T001521,19+03</datetime></lastaccessed>
+<addedtofile><datetime dst="true">20130825T204231,63+03</datetime></addedtofile></noteinfo>
+<updatedby><name>CN=Serdar Basegmez/O=developi</name></updatedby>
+<wassignedby><name>CN=Serdar Basegmez/O=developi</name></wassignedby>
+<item name="$Flags"><text>34567Cg~[</text></item>
+<item name="$TITLE"><text>com/notessensei/demo/AbstractNotesBackgroundTask.java</text></item>
+
+<item name="$DesignerVersion"><text>8.5.3</text></item>
+
+
+<item name="$FileNames" sign="true"><text>com/notessensei/demo/AbstractNotesBackgroundTask.java</text></item>
+
+</note>
